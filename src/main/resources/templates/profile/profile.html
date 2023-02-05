@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<p th:text="${'User: ' + user.getLastname() + ' ' + user.getFirstname()}"></p>
+<p th:text="${'E-mail: ' + user.getEmail()}"></p>
+<p th:text="${'Role: ' + user.getRole()}"></p>
+<p th:text="${'Joined: ' + user.joined}"></p>
+<a th:href="@{/profile/edit}">edit profile</a>
+<a th:href="@{/profile/password}">edit password</a>
+<form th:method="DELETE" th:action="@{/profile}">
+    <input type="submit" th:value="delete"/>
+</form>
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Log out"/>
+</form>
+</body>
+</html>
