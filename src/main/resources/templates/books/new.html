@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add book</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title</div>
+    <br/>
+    <label for="publication_year">Enter publication year: </label>
+    <input type="number" th:field="*{publicationYear}" id="publication_year"/>
+    <div style="color: red" th:if="${#fields.hasErrors('publicationYear')}" th:errors="*{publicationYear}">Publication year error</div>
+    <br/>
+    <label for="publisher">Enter publisher: </label>
+    <input type="text" th:field="*{publisher}" id="publisher"/>
+    <div style="color: red" th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}">Publisher birth error</div>
+    <br/>
+    <label for="pages">Enter pages: </label>
+    <input type="number" th:field="*{pages}" id="pages"/>
+    <div style="color: red" th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}">Pages birth error</div>
+    <br/>
+    <label for="count_in_shelf">Enter count in shelf: </label>
+    <input type="number" th:field="*{countInShelf}" id="count_in_shelf"/>
+    <div style="color: red" th:if="${#fields.hasErrors('countInShelf')}" th:errors="*{countInShelf}">CountInShelf error</div>
+    <br/>
+    <label for="count_in_stock">Enter count in stock: </label>
+    <input type="number" th:field="*{countInStock}" id="count_in_stock"/>
+    <div style="color: red" th:if="${#fields.hasErrors('countInStock')}" th:errors="*{countInStock}">CountInStock error</div>
+    <br/>
+    <label for="shelf_number">Enter shelf number: </label>
+    <input type="number" th:name="shelf_number" id="shelf_number"/>
+    <br/>
+    <label for="room_number">Enter room number: </label>
+    <input type="number" th:name="room_number" id="room_number"/>
+    <br/>
+    <label for="category">Choose category: </label>
+    <select th:field="*{category}" id="category">
+        <option value="">Nothing selected</option>
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}">Category</option>
+    </select>
+    <br>
+    <label for="author">Choose author: </label>
+    <select th:field="*{author}" id="author">
+        <option value="">Nothing selected</option>
+        <option th:each="author : ${authors}"
+                th:value="${author.id}"
+                th:text="${author.lastname} + ' ' + ${author.firstname}">Author</option>
+    </select>
+    <br>
+    <input type="submit" value="Add book"/>
+</form>
+</body>
+</html>
