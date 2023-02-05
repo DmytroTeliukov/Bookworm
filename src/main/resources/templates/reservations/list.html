@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Member</th>
+        <th>Email</th>
+        <th>Book</th>
+        <th>Reserved</th>
+        <th>Deadline</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.getMember().user.lastname} + ' ' + ${reservation.getMember().user.firstname}">Member</td>
+        <td th:text="${reservation.getMember().user.email}">Email</td>
+        <td th:text="${reservation.book.title}">Title</td>
+        <td th:text="${reservation.reserved}">Reserved</td>
+        <td th:text="${reservation.deadline}">Deadline</td>
+        <td th:text="${reservation.reservationStatus.name()}">Status</td>
+        <td>
+            <div th:if="${role == 'LIBRARIAN' and (reservation.reservationStatus.name() == 'RESERVED' or reservation.reservationStatus.name() == 'OUTDATED')}">
+                <form th:action="@{/reservations/{id}/submit(id=${reservation.getId()})}" th:method="POST">
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
