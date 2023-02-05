@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit profile</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/profile}" th:object="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{password}"/>
+    <label for="lastname">Enter lastname: </label>
+    <input type="text" th:field="*{lastname}" id="lastname"/>
+    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname error</div>
+    <br/>
+    <label for="firstname">Enter firstname: </label>
+    <input type="text" th:field="*{firstname}" id="firstname"/>
+    <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname error</div>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+    <input type="submit" value="Update user"/>
+</form>
+</body>
+</html>
