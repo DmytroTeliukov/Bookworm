@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit author</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/authors/{id}(id=${author.id})}" th:object="${author}">
+    <label for="lastname">Enter lastname: </label>
+    <input type="text" th:field="*{lastname}" id="lastname"/>
+    <div style="color: red" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Lastname error</div>
+    <br/>
+    <label for="firstname">Enter firstname: </label>
+    <input type="text" th:field="*{firstname}" id="firstname"/>
+    <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Firstname error</div>
+    <br/>
+    <label for="year_birth">Enter year of birth: </label>
+    <input type="number" th:field="*{yearBirth}" id="year_birth"/>
+    <div style="color: red" th:if="${#fields.hasErrors('yearBirth')}" th:errors="*{yearBirth}">Year birth error</div>
+    <br/>
+    <label for="year_death">Enter year of death: </label>
+    <input type="number" th:field="*{yearDeath}" id="year_death"/>
+    <br/>
+    <label for="biography">Enter biography: </label>
+    <input type="text" th:field="*{biography}" id="biography"/>
+    <div style="color: red" th:if="${#fields.hasErrors('biography')}" th:errors="*{biography}">Biography error</div>
+    <br/>
+    <input type="submit" value="Edit author"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+<div th:if="${role == 'LIBRARIAN'}">
+    <a href="/authors/new">Add new author</a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.lastname + ' ' + author.firstname}">Author</td>
+        <td><a th:href="@{/authors/{id}(id=${author.getId()})}" th:text="'Show details'"/></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

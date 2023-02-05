@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Author profile</title>
+</head>
+<body>
+<div th:if="${role == 'LIBRARIAN'}">
+    <a th:href="@{/authors/{id}/edit(id=${author.id})}">Edit author</a>
+    <form th:method="DELETE" th:action="@{/authors/{id}(id=${author.id})}">
+        <input type="submit" th:value="Delete"/>
+    </form>
+</div>
+<p th:text="${'Author: ' + author.getLastname() + ' ' + author.getFirstname()}"></p>
+<p th:text="${'Year of birth: ' + author.getYearBirth()}"></p>
+<div th:if="${author.getYearDeath() != 0}">
+    <p th:text="${'Year of death: ' + author.getYearDeath()}"></p>
+</div>
+<p th:text="'Biography'"/>
+<p th:text="${author.getBiography()}"></p>
+<div th:if="${!author.getBooks().isEmpty()}">
+    <p th:text="'Books'"/>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Pages</th>
+            <th>Publication year</th>
+            <th>Publisher</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${author.getBooks()}">
+            <td th:text="${book.getTitle()}">Title</td>
+            <td th:text="${book.getCategory().getName()}">Category</td>
+            <td th:text="${book.getPages()}">Pages</td>
+            <td th:text="${book.getPublicationYear()}">Publication year</td>
+            <td th:text="${book.getPublisher()}">Publisher</td>
+            <td><a th:href="@{/books/{id}(id=${book.getId()})}" th:text="'Show details'"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
